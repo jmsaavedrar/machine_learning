@@ -7,9 +7,16 @@ import linear
 
 # Load the diabetes dataset
 diabetes_X, diabetes_y = datasets.load_diabetes(return_X_y=True)
+n = diabetes_X.shape[0]
+# random sort
+idx = np.random.permutation(n)
+diabetes_X = diabetes_X[idx] 
+diabetes_y = diabetes_y[idx]
+
 XX = diabetes_X.copy()
 # Use only one feature
-diabetes_X = diabetes_X[:,5:9 ]
+diabetes_X = diabetes_X[:,2:3]
+print(diabetes_X.shape)
 
 # Split the data into training/testing sets
 diabetes_X_train = diabetes_X[:-20]
@@ -18,6 +25,7 @@ diabetes_X_test = diabetes_X[-20:]
 # Split the targets into training/testing sets
 diabetes_y_train = diabetes_y[:-20]
 diabetes_y_test = diabetes_y[-20:]
+
 
 # Create linear regression object
 regr = linear_model.LinearRegression()
@@ -48,10 +56,8 @@ print(coeff)
 # print(y)
 #print(diabetes_y_train)
 # Plot outputs
-# plt.scatter(diabetes_X_test, diabetes_y_test, color="black")
-# plt.plot(diabetes_X_test, diabetes_y_pred, color="blue", linewidth=3)
-# # 
-# # plt.xticks(())
-# # plt.yticks(())
-# # 
-# plt.show()
+plt.scatter(diabetes_X_train, diabetes_y_train, color="blue")
+plt.ylabel('y (diabetes progression)')
+plt.xlabel('x (body mass index)')
+plt.show()
+
