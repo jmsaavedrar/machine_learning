@@ -3,7 +3,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn  import datasets, linear_model
 from sklearn.metrics  import mean_squared_error, r2_score
-import linear
+import linear_models.linear as linear
+import metrics as mm
+
+
+def r2score(y_true, y_pred):
+    mu = np.average(y_true)
+    sigma = np.sum(np.square(y_true - mu))    
+    sigma_r = np.sum(np.square(y_true - y_pred))
+    
+    return (1 - sigma_r / sigma)
 
 # Load the diabetes dataset
 diabetes_X, diabetes_y = datasets.load_diabetes(return_X_y=True)
@@ -48,9 +57,19 @@ ones = np.ones((diabetes_X_train.shape[0],1))
 # print(ones.shape)
 # print(diabetes_X_train.shape)
 X = np.concatenate([ones, diabetes_X_train], axis = 1)
+
+ones = np.ones((diabetes_X_test.shape[0],1))
+
+X_test =  np.concatenate([ones, diabetes_X_test], axis = 1)
 y = diabetes_y_train
-print(X.shape)  
+
 coeff = linear.linearRegression(X, y)
+
+y_pred =  np.matmul(X_test, coeff)
+
+v = r2score(diabetes_y_test, y_pred)
+print('v:{}'.format(v))
+
 print(coeff)
 # print(XX[0])
 # print(y)
