@@ -1,21 +1,27 @@
-#diabetes
+import csv
 import linear_models.linreg as linreg
 import metrics.metrics as metrics
 import matplotlib.pyplot as plt
 import numpy as np
-import sklearn.datasets as datasets
 
-# reading data
-X, y = datasets.load_diabetes(return_X_y=True)
-# Use only one feature (bmi index = 2)
-X = X[:,2:3]
-print(X.shape)
+filename = 'data/Housing.csv'
+X = []
+y = []
+with open(filename) as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    
+    for i, row in enumerate(csv_reader) :        
+        if i > 0:
+            y.append(float(row[0]))            
+            features = [float(row[1]), float(row[2])]
+            X.append(features)             
+     
+X = np.array(X)[:, 0:1]
+y = np.array(y)
 
-# Split the data into training/testing sets
-# training  80% testing 20%
+
 n = X.shape[0]
-n_test = int(np.rint(0.2 * n)) 
-
+n_test = int(np.rint(0.2 * n))
 # random sort
 idx = np.random.permutation(n)
 X = X[idx] 
@@ -41,4 +47,5 @@ plt.plot(line_x, line_y, marker = 'o', color = 'red' )
 plt.ylabel('y (diabetes progression)')
 plt.xlabel('x (body mass index)')
 plt.show()
+
 
