@@ -15,6 +15,8 @@ class LinearRegression :
     def predict(self, X: np.ndarray):
         ones = np.ones((X.shape[0],1))
         X = np.concatenate([ones, X], axis = 1)
+        print(X.shape)
+        print(self.coeff.shape)
         y_pred =  np.matmul(X, self.coeff)
         return y_pred
         
