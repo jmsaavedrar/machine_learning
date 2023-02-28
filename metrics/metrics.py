@@ -8,7 +8,5 @@ def r2score(y_true, y_pred):
     return 1 - sigma_r / sigma
 
 def accuracy(y_true, y_pred):
-    y_pred[y_pred < 0.5] = 0
-    y_pred[y_pred >= 0.5] = 1
-    acc = np.mean((y_true == y_pred).astype(dtype = np.int32))
+    acc = np.mean(np.equal(y_true,y_pred).astype(dtype = np.int32))
     return acc    

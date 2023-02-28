@@ -41,5 +41,7 @@ class LogRegression :
             X = np.concatenate([ones, X], axis = 1)        
         y_pred =  np.matmul(X, self.coeff)
         y_pred = activations.sigmoid(y_pred)
+        y_pred[y_pred < 0.5] = 0
+        y_pred[y_pred >= 0.5] = 1
         return y_pred
     
