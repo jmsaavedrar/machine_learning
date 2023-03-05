@@ -1,6 +1,7 @@
 import numpy as np
 import linear_models.logreg as logreg
 import sklearn.datasets as datasets
+import metrics.metrics as metrics
 #dataset
 iris = datasets.load_iris()
 X = iris.data[:100,:]
@@ -23,13 +24,12 @@ print(y_test.shape)
 print(X_test.shape)
 #Logistic Regression
 model = logreg.LogRegression()
-# std = np.std(X_train, axis = 0)
-# mu = np.mean(X_train, axis = 0)
-# X_train = (X_train - mu ) / std
+
 print(y_train)
 coeff = model.fit(X_train, y_train)
 
-
 #Evaluation (accuracy x clase)
-
+y_pred =model.predict(X_test)
+acc= metrics.accuracy(np.expand_dims(y_test, axis = 1) , y_pred)
+print('Acc Test {}'.format(acc))
 #
