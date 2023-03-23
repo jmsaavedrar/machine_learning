@@ -1,6 +1,6 @@
 import numpy as np
 import linear_models.activations as activations
-import metrics.metrics as metrics
+import metrics.ametrics as metrics
  
 class LogRegression :
     def __init__(self):
