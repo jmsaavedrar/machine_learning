@@ -24,7 +24,12 @@ X_train = X[:-n_test, :]
 X_test = X[-n_test:,:]
 y_train = y[:-n_test]
 y_test = y[-n_test:]
-
+""" data normalization, improve convergence """
+mu = np.mean(X_train, axis = 0)
+dst = np.std(X_train, axis = 0)
+X_train = (X_train - mu) / dst
+X_test = (X_test - mu) / dst
+"""-------------------------------------------"""
 
 SM = softmaxreg.SoftmaxReg(3)
 coeff = SM.fit(X_train, y_train)
@@ -35,11 +40,12 @@ cm = metrics.confusion_matriz(y_test, y_pred, 3)
 print('confusion matrix')
 print(cm)
 
-# project 2D
-reducer = umap.UMAP()
-print('UMAP', flush = True)
-reducer.fit(X) 
-embedding = reducer.transform(X)
-print(embedding.shape)
-plt.scatter(embedding[:, 0], embedding[:, 1], c=y, cmap='Paired') 
-plt.show()
+# Just data visualization
+#  #project 2D
+# reducer = umap.UMAP()
+# print('UMAP', flush = True)
+# reducer.fit(X) 
+# embedding = reducer.transform(X)
+# print(embedding.shape)
+# plt.scatter(embedding[:, 0], embedding[:, 1], c=y, cmap='Paired') 
+# plt.show()

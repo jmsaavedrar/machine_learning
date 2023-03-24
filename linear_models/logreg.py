@@ -1,6 +1,6 @@
 import numpy as np
 import linear_models.activations as activations
-import metrics.ametrics as metrics
+import metrics.metrics as metrics
  
 class LogRegression :
     def __init__(self):
@@ -40,8 +40,6 @@ class LogRegression :
             ones = np.ones((X.shape[0],1))
             X = np.concatenate([ones, X], axis = 1)        
         y_pred =  np.matmul(X, self.coeff)
-        y_pred = activations.sigmoid(y_pred)
-        y_pred[y_pred < 0.5] = 0
-        y_pred[y_pred >= 0.5] = 1
+        y_pred = activations.sigmoid(y_pred)        
         return y_pred
     

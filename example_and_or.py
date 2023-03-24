@@ -2,7 +2,7 @@ import numpy as np
 import nn.perceptron as perceptron
 import sklearn.datasets as datasets
 import metrics.metrics as metrics
-import 
+
 #dataset
 X = np.array([[0,0],[0,1],[1,0],[1,1]], dtype = np.float64)
 y = np.array([0,0,0,1], dtype = np.float64)
@@ -13,7 +13,7 @@ n = X.shape[0]
 model = perceptron.Perceptron()
 model.setLoss('bce')
 model.setLearningRate(1)
-model.setSteps(10)
+model.setSteps(20)
 coeff = model.fit(X, y)
 
 #Evaluation (accuracy x clase)

@@ -8,7 +8,7 @@ class SoftmaxReg :
         self.n_classes = n_classes
         self.coeff = None
         self.dim = None
-        self.steps = 1000
+        self.steps = 100
         self.min_error = 0.0001
         self.print_step = 20
     
@@ -26,11 +26,12 @@ class SoftmaxReg :
         for i in range(self.steps) :                            
             y_pred = self.predict(X, add_ones = False)
             if i % self.print_step  == 0 :                
-                acc = metrics.accuracy(y_train, y_pred)
+                acc = metrics.multiclass_accuracy(y_train, y_pred)
                 print('it {} acc {}'.format(i,acc), flush = True)
                                                             
-            softmax = activations.softmax(np.matmul(X, self.coeff), axis = 1)
-            adjust = - np.matmul(np.transpose(X), softmax)                                                
+            #softmax = activations.softmax(np.matmul(X, self.coeff), axis = 1)
+            #y_pred es softmax
+            adjust = - np.matmul(np.transpose(X), y_pred)                                                
             y  = np.squeeze(y_train)                         
             for cl in np.arange(self.n_classes):
                 x_mean_class = np.sum(X[np.where(y == cl)[0], :], axis = 0)                            
@@ -46,6 +47,5 @@ class SoftmaxReg :
         if add_ones :
             ones = np.ones((X.shape[0],1))
             X = np.concatenate([ones, X], axis = 1)        
-        softmax =  activations.softmax(np.matmul(X, self.coeff), axis = 1)        
-        y_pred = np.argmax(softmax, axis = 1, keepdims = True)        
+        y_pred =  activations.softmax(np.matmul(X, self.coeff), axis = 1)                    
         return y_pred

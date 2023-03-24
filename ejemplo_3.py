@@ -15,17 +15,20 @@ idx = np.random.permutation(n)
 X = X[idx] 
 y = y[idx]
 
-X_train = X[:-n_test] 
+X_train = X[:-n_test]
+y_train = y[:-n_test] 
 X_test = X[-n_test:]
-y_train = y[:-n_test]
 y_test = y[-n_test:]
 
+""" data normalization, improve convergence """
 mu = np.mean(X_train, axis = 0)
 dst = np.std(X_train, axis = 0)
 X_train = (X_train - mu) / dst
-X_test = (X_train - mu) / dst
+X_test = (X_test - mu) / dst
+"""-------------------------------------------"""
 print(y_test.shape)
 print(X_test.shape)
+
 #Logistic Regression
 model = logreg.LogRegression()
 

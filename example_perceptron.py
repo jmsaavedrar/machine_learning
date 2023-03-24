@@ -20,13 +20,19 @@ X_test = X[-n_test:]
 y_train = y[:-n_test]
 y_test = y[-n_test:]
 
-print(y_test.shape)
-print(X_test.shape)
+""" data normalization, improve convergence """
+mu = np.mean(X_train, axis = 0)
+dst = np.std(X_train, axis = 0)
+X_train = (X_train - mu) / dst
+X_test = (X_test - mu) / dst
+"""-------------------------------------------"""
 #Logistic Regression
 model = perceptron.Perceptron()
 model.setLoss('mse')
+model.setSteps(100)
+model.setPrintSteps(10)
 
-print(y_train)
+
 coeff = model.fit(X_train, y_train)
 
 #Evaluation (accuracy x clase)

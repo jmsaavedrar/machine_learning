@@ -13,7 +13,7 @@ class Perceptron :
         self.dim = None
         self.steps = 1000
         self.min_error = 0.0001
-        self.print_step = 1
+        self.print_steps = 1
         self.loss = 'bce'
         
     def setLoss(self, loss:str):
@@ -22,6 +22,9 @@ class Perceptron :
     
     def setSteps(self, steps:int):        
         self.steps = steps
+    
+    def setPrintSteps(self, psteps:int):        
+        self.print_steps = psteps
     
     def setLearningRate(self, lr:float):        
         self.lr = lr
@@ -36,12 +39,12 @@ class Perceptron :
         self.dim = X.shape[1]
         self.n = X.shape[0]
         self.coeff = np.random.normal(loc = 0, scale = 0.1, size = (self.dim,1))        
-        print(self.coeff)
+        
         
         for i in range(self.steps) :                            
             y_pred = self.predict(X, add_ones = False)
             
-            if i % self.print_step  == 0 :                
+            if i % self.print_steps  == 0 :                
                 acc = metrics.accuracy(y_train, y_pred.copy())
                 if self.loss == 'bce' :
                     loss = losses.bce_loss(y_train, y_pred)
@@ -58,10 +61,9 @@ class Perceptron :
                         
             adjust = diff * X               
             adjust = np.mean(adjust, axis = 0, keepdims = True)
-            adjust = np.transpose(adjust)
-            print(adjust)            
+            adjust = np.transpose(adjust)                    
             self.coeff = self.coeff - self.lr * adjust
-            print(self.coeff)                        
+                    
         return self.coeff 
              
            
