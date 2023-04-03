@@ -15,11 +15,12 @@ def accuracy(y_true, y_pred):
     return acc 
 
 def multiclass_accuracy(y_true, y_pred):
-    y_pred = np.argmax(y_pred, axis = 1, keepdims = True)    
-    acc = np.mean(np.equal(y_true,y_pred).astype(dtype = np.int32))
+    y_pred = y_pred.copy()
+    y_pred = np.argmax(y_pred, axis = 1, keepdims = False)        
+    acc = np.mean(np.equal(np.squeeze(y_true),np.squeeze(y_pred)).astype(dtype = np.int32))
     return acc 
 
-def confusion_matriz(y_true, y_pred, n_classes):
+def confusion_matrix(y_true, y_pred, n_classes):
     y_pred = np.argmax(y_pred, axis = 1, keepdims = True)
     cm = np.zeros((n_classes, n_classes), dtype = np.int32)
     for cl_true in np.arange(n_classes) :

@@ -80,18 +80,20 @@ if __name__ == '__main__' :
     y = np.array([[0,0,0,1]], dtype = np.float64)
     y = np.transpose(y)    
     pesos = np.array([[0,0,0.2]], dtype =np.float32)
-    for _ in range(10):
+    for i in range(20):
+        print('-----------------------')
+        print('------ {} ----- '.format(i))
+        print('-----------------------')
         a = np.matmul(X, np.transpose(pesos))    
         pred = activations.sigmoid(a)    
-        print(a)
-        print(pred)
-        print(y)
+        print('a: {}'.format(np.transpose(a)))
+        print('pred {}'.format(np.transpose(pred)))
+        print(np.transpose(y))
         diff = (pred - y)
-        print(diff)
+        print('diff {}'.format(np.transpose(diff)))
         inc = np.matmul(np.transpose(X), diff)
-        print(inc)
+        inc = inc / X.shape[0]
+        print('inc {}'.format(np.transpose(inc)))
         pesos = pesos - np.transpose(inc)
-        print(pesos)
-    
-    
-    
+        print('pesos {}'.format(pesos))
+

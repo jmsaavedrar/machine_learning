@@ -5,7 +5,7 @@ import metrics.metrics as metrics
 #dataset
 iris = datasets.load_iris()
 X = iris.data[:100,:]
-y = iris.target[:100]
+y = iris.target[:100:]
 
 n = X.shape[0]
 n_test = int(np.rint(0.2 * n)) 

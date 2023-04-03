@@ -8,9 +8,9 @@ class SoftmaxReg :
         self.n_classes = n_classes
         self.coeff = None
         self.dim = None
-        self.steps = 100
+        self.steps = 200
         self.min_error = 0.0001
-        self.print_step = 20
+        self.print_step = 10
     
     def fit(self, X_train:np.ndarray, y_train : np.ndarray) -> np.ndarray :
         n = X_train.shape[0]
