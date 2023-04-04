@@ -81,7 +81,7 @@ if __name__ == '__main__' :
     y = np.array([[0,0,0,1]], dtype = np.float64)
     y = np.transpose(y)    
     pesos = np.array([[0,0,0.2]], dtype =np.float32)
-    for i in range(20):
+    for i in range(300):
         print('-----------------------')
         print('------ {} ----- '.format(i))
         print('-----------------------')
@@ -89,7 +89,7 @@ if __name__ == '__main__' :
         pred = activations.sigmoid(a)    
         print('a: {}'.format(np.transpose(a)))
         print('pred {}'.format(np.transpose(pred)))
-        print(np.transpose(y))
+        print('y {}'.format(np.transpose(y)))
         diff = (pred - y)
         print('diff {}'.format(np.transpose(diff)))
         inc = np.matmul(np.transpose(X), diff)
