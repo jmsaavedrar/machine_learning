@@ -29,8 +29,8 @@ X_test = (X_test - mu) / dst
 #Logistic Regression
 model = perceptron.Perceptron()
 model.setLoss('mse')
-model.setSteps(100)
-model.setPrintSteps(10)
+model.setSteps(50)
+model.setPrintSteps(1)
 
 
 coeff = model.fit(X_train, y_train)

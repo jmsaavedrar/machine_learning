@@ -46,11 +46,12 @@ class Perceptron :
             
             if i % self.print_steps  == 0 :                
                 acc = metrics.accuracy(y_train, y_pred.copy())
-                if self.loss == 'bce' :
-                    loss = losses.bce_loss(y_train, y_pred)
-                else :
-                    loss = losses.mse_loss(y_train, y_pred)
-                print('it {} {} loss {}'.format(i,self.loss, loss), flush = True)
+                #if self.loss == 'bce' :
+                loss_bce = losses.bce_loss(y_train, y_pred)
+                loss_mse = losses.mse_loss(y_train, y_pred)
+                #else :
+                #    loss = losses.mse_loss(y_train, y_pred)
+                print('it {} {} loss_bce {} loss_mse {}'.format(i,self.loss, loss_bce, loss_mse), flush = True)
                 print('it {} acc {}'.format(i,acc), flush = True)
                             
             diff = (y_pred - y_train)
