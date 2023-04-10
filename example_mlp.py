@@ -68,4 +68,7 @@ mc = metrics.confusion_matrix(y_test, y_pred, 10)
 
 # print mc
 print(mc)
-
+# mc as percentages
+rmc = mc.astype(np.float32) / np.sum(mc, axis = 1, keepdims = True)
+rmc = (rmc * 100).astype(np.int32) / 100 
+print(rmc)
