@@ -42,7 +42,7 @@ x_train = (x_train - mu)
 x_test = (x_test - mu)  
  
 # create the model
-mlp = mlp.MLP([256, 128], 10)
+mlp = mlp.MLP([512, 256], 10)
 input_vector = tf.keras.Input(x_train.shape)
 mlp(input_vector)    
 mlp.summary()
