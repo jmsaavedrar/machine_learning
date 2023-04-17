@@ -11,10 +11,13 @@ class SimpleModel(tf.keras.Model):
         self.max_pool = tf.keras.layers.MaxPool2D((3,3), strides = 2, padding = 'same')
         self.relu = tf.keras.layers.ReLU();        
         self.bn_conv_1 = tf.keras.layers.BatchNormalization()
+        #self.bn_conv_1 = tf.keras.layers.LayerNormalization()        
         self.conv_2 = tf.keras.layers.Conv2D(64, (3,3), padding = 'same',  kernel_initializer='he_normal')
         self.bn_conv_2 = tf.keras.layers.BatchNormalization()
+        #self.bn_conv_2 = tf.keras.layers.LayerNormalization()
         self.conv_3 = tf.keras.layers.Conv2D(128, (3,3), padding = 'same', kernel_initializer='he_normal')
         self.bn_conv_3 = tf.keras.layers.BatchNormalization()     
+        #self.bn_conv_3 = tf.keras.layers.LayerNormalization()
         self.fc1 = tf.keras.layers.Dense(256, kernel_initializer='he_normal')
         #self.bn_fc_1 = tf.keras.layers.LayerNormalization()
         self.bn_fc_1 = tf.keras.layers.BatchNormalization()
