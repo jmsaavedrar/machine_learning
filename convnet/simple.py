@@ -20,7 +20,7 @@ class SimpleModel(tf.keras.Model):
         #self.bn_conv_3 = tf.keras.layers.LayerNormalization()
         self.fc1 = tf.keras.layers.Dense(256, kernel_initializer='he_normal', name = 'dense1')
         #self.bn_fc_1 = tf.keras.layers.LayerNormalization()
-        self.bn_fc_1 = tf.keras.layers.BatchNormalization()
+        self.bn_fc_1 = tf.keras.layers.BatchNormalization(name = 'embedding' )
         self.fc2 = tf.keras.layers.Dense(number_of_classes)
 
     # here, connecting the modules

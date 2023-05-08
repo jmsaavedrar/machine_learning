@@ -3,16 +3,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class SSearch :
-    def __init__(self):
+    def __init__(self, model_file, layer_name):
         #loading the model
-        model = tf.keras.models.load_model('mnist_model')         
+        model = tf.keras.models.load_model(model_file)         
         model.summary()
         #defining the submodel (embedding layer)                                        
-        output = model.get_layer('batch_normalization_3').output
+        output = model.get_layer(layer_name).output
         self.sim_model = tf.keras.Model(model.input, output)        
         self.sim_model.summary()
         self.mu = np.load('mean.npy')
-        print('mu {}'.format(self.mu))
+        #print('mu {}'.format(self.mu))
         #loading data        
         
     def load_catalog(self, data_file, label_file):
@@ -27,7 +27,8 @@ class SSearch :
         
     def compute_features(self, data):
         data = self.prepare_data(data)                        
-        self.fv = self.sim_model.predict(data)            
+        self.fv = self.sim_model.predict(data)         
+        print('FV-shape {}'.format(self.fv.shape))   
         return self.fv
 #
     def compute_features_on_catalog(self):
@@ -35,7 +36,10 @@ class SSearch :
     
     def ssearch_all(self):
         _ = self.compute_features_on_catalog()
-        sim = np.matmul(self.fv, np.transpose(self.fv))
+        fv = self.fv
+        normfv = np.linalg.norm(fv, ord = 2, axis = 1, keepdims = True)        
+        fv = fv / normfv
+        sim = np.matmul(fv, np.transpose(fv))
         idxq = np.random.randint(self.fv.shape[0]);
         sim_q = sim[idxq, :]
         print('label {}'.format(self.data_labels[idxq]))
@@ -51,7 +55,8 @@ class SSearch :
         i = 0
         for i in np.arange(n) :
             image[:, i * size:(i + 1) * size] = self.data_catalog[sort_idx[i], : , : ]
-            i = i + 1        
+            i = i + 1   
+        plt.axis('off')     
         plt.imshow(image)
         plt.show()       
          
