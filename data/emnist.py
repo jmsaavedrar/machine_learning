@@ -36,17 +36,18 @@ def getSampleImage(n_rows, n_cols, data):
     return image
 
 if __name__ == '__main__' :
-    #base_dir = '/mnt/hd-data/Datasets/emnist/gzip/'
-    base_dir = '/home/vision/smb-datasets/emnist/gzip'
+    base_dir = '/mnt/hd-data/Datasets/emnist/gzip/'
+    #base_dir = '/home/vision/smb-datasets/emnist/gzip'
     fimages = os.path.join(base_dir, 'emnist-letters-test-images-idx3-ubyte')
     limages = os.path.join(base_dir, 'emnist-letters-test-labels-idx1-ubyte')    
     data = readMNISTImages(fimages)
     labels = readMNISTLabels(limages)                
     image = getSampleImage(10, 20, data)
-    idxs = np.random.permutation(data.shape[0])[:10000]
+    n_sample = 10000
+    idxs = np.random.permutation(data.shape[0])[:n_sample]
     np.save('test_emnist_images.npy', data[idxs,:,:])
     np.save('test_emnist_labels.npy', labels[idxs])
-    print('saved')
+    
     plt.imshow(image, cmap='gray')    
     plt.show()
     
