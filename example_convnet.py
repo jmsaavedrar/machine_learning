@@ -39,11 +39,10 @@ mu = np.mean(x_train, axis = 0)
 # normalize data, just centering
 x_train = (x_train - mu) 
 x_test = (x_test - mu)  
-
+np.save('mean.npy', mu)
 # create the model
 model = simple.SimpleModel(10)
-input_vector = tf.keras.Input(x_train.shape[1:])
-model(input_vector)    
+model = model.model(x_train.shape[1:])    
 model.summary()
 
 # defining optimizer
@@ -59,7 +58,7 @@ model.compile(
 model.fit(x_train, 
         y_train_one_hot, 
         batch_size=256,  
-        epochs = 20,
+        epochs = 10,
         validation_data = (x_test, y_test_one_hot))
  
 # prediction using directly the trained model
@@ -68,7 +67,7 @@ y_pred = model(x_test, training = False)
  
 # computing confusion_matrix
 mc = metrics.confusion_matrix(y_test, y_pred, 10)
- 
+model.save('mnist_model')
 # print mc
 print(mc)
 # mc as percentages

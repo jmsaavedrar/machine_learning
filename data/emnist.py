@@ -1,7 +1,7 @@
 import numpy as np
 import struct
 import matplotlib.pyplot as plt
-
+import os
 
 def readMNISTImages(fname) :
     with open(fname,'rb') as f:
@@ -36,11 +36,17 @@ def getSampleImage(n_rows, n_cols, data):
     return image
 
 if __name__ == '__main__' :
-    data = readMNISTImages('/mnt/hd-data/Datasets/emnist/gzip/emnist-letters-test-images-idx3-ubyte')
-    labels = readMNISTLabels('/mnt/hd-data/Datasets/emnist/gzip/emnist-letters-test-labels-idx1-ubyte')
+    #base_dir = '/mnt/hd-data/Datasets/emnist/gzip/'
+    base_dir = '/home/vision/smb-datasets/emnist/gzip'
+    fimages = os.path.join(base_dir, 'emnist-letters-test-images-idx3-ubyte')
+    limages = os.path.join(base_dir, 'emnist-letters-test-labels-idx1-ubyte')    
+    data = readMNISTImages(fimages)
+    labels = readMNISTLabels(limages)                
     image = getSampleImage(10, 20, data)
-    #print(labels[10000])
-    plt.imshow(image, cmap='gray')
-    
+    idxs = np.random.permutation(data.shape[0])[:10000]
+    np.save('test_emnist_images.npy', data[idxs,:,:])
+    np.save('test_emnist_labels.npy', labels[idxs])
+    print('saved')
+    plt.imshow(image, cmap='gray')    
     plt.show()
     
