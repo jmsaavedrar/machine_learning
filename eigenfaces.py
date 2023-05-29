@@ -2,7 +2,12 @@ import skimage.io as io
 import matplotlib.pyplot  as plt
 import numpy as np
 import skimage.transform as transform
+"""
+Dataset
 
+Download at https://www.dropbox.com/s/g20qgk3ue48k805/yale.zip
+
+"""
 def get_sample(n_rows, n_cols, faces, size, dtype = np.uint8, bg = 255, nosort = False ):    
     image = np.ones((n_rows*size, n_cols*size), dtype = dtype)*bg
     n = n_rows * n_cols
@@ -45,7 +50,7 @@ def recompose(y, w, mu):
     return x + mu
                 
 if __name__ == '__main__' :
-    list_of_faces = '/mnt/hd-data/Datasets/YALE/faces.txt'
+    list_of_faces = '/mnt/hd-data/Datasets/YALE/faces.txt'    
     filenames, labels = read_data(list_of_faces)
     size = 64
     faces = read_faces(filenames, size)
