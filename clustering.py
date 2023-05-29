@@ -88,8 +88,7 @@ datasets = [
             "xi": 0.1, 
             "min_cluster_size": 0.2
         }
-    ),
-    (no_structure, {})
+    )    
 ]
 
 for i_dataset, (dataset, algo_params) in enumerate(datasets):
@@ -105,11 +104,11 @@ for i_dataset, (dataset, algo_params) in enumerate(datasets):
     # ============
     # Create cluster objects
     # ============    
-    two_means = cluster.KMeans(n_clusters=params["n_clusters"], n_init="auto")    
+    kmeans = cluster.KMeans(n_clusters=params["n_clusters"], n_init="auto")    
     dbscan = cluster.DBSCAN(eps=params["eps"])    
     
     clustering_algorithms = (
-        ("KMeans", two_means),    
+        ("KMeans", kmeans),    
         ("DBSCAN", dbscan),        
     )
 
@@ -148,8 +147,7 @@ for i_dataset, (dataset, algo_params) in enumerate(datasets):
             )
         )
         # add black color for outliers (if any)
-        colors = np.append(colors, ["#000000"])
-        
+        colors = np.append(colors, ["#000000"])            
         plt.scatter(X[:, 0], X[:, 1], s=10, color=colors[y_pred])
 
         plt.xlim(-2.5, 2.5)
