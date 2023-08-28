@@ -30,10 +30,12 @@ data = tfds.load('tfds_skberlin')
 batch_size = 64
 ds_train = data['train']
 ds_train = ds_train.shuffle(1024).map(map_fun).batch(batch_size)
+
 ds_test = data['test']
+val_steps = len(ds_test) // batch_size
 ds_test = ds_test.shuffle(1024).map(map_fun).batch(batch_size)
 
-val_steps = len(ds_test) // batch_size
+
 # defining optimizer
 opt = tf.keras.optimizers.SGD(momentum = 0.9)
  
@@ -45,9 +47,9 @@ model.compile(
  
 # training or fitting 
 model.fit(ds_train, 
-          epochs = 10, 
+          epochs = 10,
           validation_data = ds_test, 
-          validation_steps = val_steps)
+          validation_steps = 10)
  
 # prediction using directly the trained model
 # there is also a function called -- predict -- , you can check it  
