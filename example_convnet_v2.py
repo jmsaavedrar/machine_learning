@@ -25,13 +25,13 @@ model = model.model([256,256,3])
 model.summary()
 
 data = tfds.load('tfds_skberlin') 
-
+batch_size = 64
 ds_train = data['train']
-ds_train = ds_train.shuffle(1024).map(map_fun).batch(32)
+ds_train = ds_train.shuffle(1024).map(map_fun).batch(batch_size)
 ds_test = data['test']
-ds_test = ds_test.shuffle(1024).map(map_fun).batch(32)
+ds_test = ds_test.shuffle(1024).map(map_fun).batch(batch_size)
 
-val_steps = len(ds_test) / 32
+val_steps = len(ds_test) / batch_size
 # defining optimizer
 opt = tf.keras.optimizers.SGD(momentum = 0.9)
  
@@ -60,4 +60,3 @@ print('model was saved at {}'.format(model_file))
 # mc as percentages
 #rmc = mc.astype(np.float32) / np.sum(mc, axis = 1, keepdims = True)
 #rmc = (rmc * 100).astype(np.int32) / 100 
-print(rmc)
