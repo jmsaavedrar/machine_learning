@@ -23,7 +23,7 @@ def map_fun(sample) :
 # model = simple.SimpleModel(250)
 #
 # model = model.model([256,256,3])
-model = resnet.ResNet([2,2,2,2], [64,128,256,512]).model([256,256,3])
+model = resnet.ResNet([2,2,2,2], [64,128,256,512], 250).model([256,256,3])
 model.summary()
 
 data = tfds.load('tfds_skberlin') 
