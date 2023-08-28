@@ -20,10 +20,8 @@ def map_fun(sample) :
 # loading dataset
 
 # create the model
-# model = simple.SimpleModel(250)
-#
-# model = model.model([256,256,3])
-model = resnet.ResNet([2,2,2,2], [64,128,256,512], 250).model([256,256,3])
+model = simple.SimpleModel(250).model([256,256,3])
+#model = resnet.ResNet([2,2,2,2], [64,128,256,512], 250).model([256,256,3])
 model.summary()
 
 data = tfds.load('tfds_skberlin') 
