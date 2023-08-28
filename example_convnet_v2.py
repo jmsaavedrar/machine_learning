@@ -31,7 +31,7 @@ ds_train = ds_train.shuffle(1024).map(map_fun).batch(batch_size)
 ds_test = data['test']
 ds_test = ds_test.shuffle(1024).map(map_fun).batch(batch_size)
 
-val_steps = len(ds_test) / batch_size
+val_steps = len(ds_test) // batch_size
 # defining optimizer
 opt = tf.keras.optimizers.SGD(momentum = 0.9)
  
