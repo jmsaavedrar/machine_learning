@@ -238,6 +238,7 @@ class ResNet(tf.keras.Model):
         x = self.avg_pool(x)                
         x = tf.keras.layers.Flatten()(x)                        
         x = self.classifier(x)
+        x = tf.keras.layers.Softmax()(x)
         return x
     
     def model(self, input_shape):
