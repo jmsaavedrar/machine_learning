@@ -12,7 +12,7 @@ import metrics.metrics as metrics
 
 def map_fun(sample) :
     image = sample['image']
-    image = tf.image.grayscale_to_rgb(image)
+    image = tf.image.grayscale_to_rgb(image) 
     label = sample['label']
     label = tf.one_hot(label, depth = 250)    
     return image, label
@@ -37,17 +37,17 @@ ds_test = ds_test.shuffle(1024).map(map_fun).batch(batch_size)
 # defining optimizer
 opt = tf.keras.optimizers.SGD(momentum = 0.9)
  
-# put all together  
+# put all together  'categorical_crossentropy'
 model.compile(
          optimizer=opt,              
-          loss='categorical_crossentropy', 
+          loss=tf.keras.losses.CategoricalCrossentropy(), 
           metrics=['accuracy'])
  
 # training or fitting 
 model.fit(ds_train, 
           epochs = 10,
           validation_data = ds_test, 
-          validation_steps = 10)
+          validation_steps = val_steps)
  
 # prediction using directly the trained model
 # there is also a function called -- predict -- , you can check it  
