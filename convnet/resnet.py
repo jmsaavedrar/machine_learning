@@ -232,7 +232,7 @@ class ResNet(tf.keras.Model):
         self.avg_pool = tf.keras.layers.GlobalAveragePooling2D()                     
         self.classifier = tf.keras.layers.Dense(number_of_classes, name='classifier')
         
-    def call(self, inputs, training):
+    def call(self, inputs, training = True):
         x = inputs
         x = self.backbone(x, training)    
         x = self.avg_pool(x)                
