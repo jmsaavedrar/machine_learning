@@ -6,6 +6,7 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 import numpy as np
 import convnet.simple as simple
+import convnet.resnet as resnet
 import metrics.metrics as metrics
     
 
@@ -19,9 +20,10 @@ def map_fun(sample) :
 # loading dataset
 
 # create the model
-model = simple.SimpleModel(250)
-
-model = model.model([256,256,3])    
+# model = simple.SimpleModel(250)
+#
+# model = model.model([256,256,3])
+model = resnet.ResNet([2,2,2,2], [64,128,256,512]).model([256,256,3])
 model.summary()
 
 data = tfds.load('tfds_skberlin') 
@@ -53,7 +55,7 @@ model.fit(ds_train,
  
 # computing confusion_matrix
 #mc = metrics.confusion_matrix(y_test, y_pred, 10)
-model_file = 'model'
+model_file = 'model-res'
 model.save(model_file)
 print('model was saved at {}'.format(model_file))
 # print mc)
