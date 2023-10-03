@@ -39,14 +39,17 @@ class SSearch :
         fv = self.fv
         normfv = np.linalg.norm(fv, ord = 2, axis = 1, keepdims = True)        
         fv = fv / normfv
-        sim = np.matmul(fv, np.transpose(fv))
+        self.sim = np.matmul(fv, np.transpose(fv))
+        np.save('sim_emnist', self.sim)
+        print('sim_emnist.npy saved')
+    
+    def random_view(self):
         idxq = np.random.randint(self.fv.shape[0]);
-        sim_q = sim[idxq, :]
+        sim_q = self.sim[idxq, :]
         print('label {}'.format(self.data_labels[idxq]))
         sort_idx = np.argsort(-sim_q)[:10]
         print(self.data_labels[sort_idx])
-        self.visualize(sort_idx)
-    
+        self.visualize(sort_idx)    
     
     def visualize(self, sort_idx):    
         size = 28
