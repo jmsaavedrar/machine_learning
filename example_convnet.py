@@ -67,7 +67,7 @@ y_pred = model(x_test, training = False)
  
 # computing confusion_matrix
 mc = metrics.confusion_matrix(y_test, y_pred, 10)
-model_file = 'emnist_model'
+model_file = 'mnist_model'
 model.save(model_file)
 print('model was saved at {}'.format(model_file))
 # print mc
