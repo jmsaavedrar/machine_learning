@@ -57,7 +57,7 @@ model.compile(
 # training or fitting 
 model.fit(x_train, 
         y_train_one_hot, 
-        batch_size=256,  
+        batch_size=16,  
         epochs = 10,
         validation_data = (x_test, y_test_one_hot))
  
