@@ -23,4 +23,10 @@ https://docs.anaconda.com/free/anaconda/install/
   
   $ python example_convnet.py
 
+  ![image](https://github.com/jmsaavedrar/machine_learning/assets/8441460/214cf77c-fa2d-4c74-8bad-fa07e51dc880)
+
+  At the end, you will have the folder "mnist_model" with the model saved.
+  
+## Testing features learned by the CNN
+Now you can use the model for similarity search in other dataset like [EMNIST-LETTERS](https://www.nist.gov/itl/products-and-services/emnist-dataset).
   
