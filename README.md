@@ -43,7 +43,9 @@ After running, you will have some image retrieval results. Please see the images
 
 
 ![result_1415](https://github.com/jmsaavedrar/machine_learning/assets/8441460/ca0033d6-bb11-46c7-bfaf-1b21905b283c)
+
  ![result_1047](https://github.com/jmsaavedrar/machine_learning/assets/8441460/d9c204b4-71da-4bce-9c29-368f50b5c53e)
+ 
 ![result_4843](https://github.com/jmsaavedrar/machine_learning/assets/8441460/7c06baa1-c1b5-422e-90f2-604b697ab9aa)
 
 This shows that we can use a pretrained model for other different problem, where images share some features.
