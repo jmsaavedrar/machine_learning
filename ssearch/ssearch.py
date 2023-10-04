@@ -20,7 +20,7 @@ class SSearch :
             self.sim_model.summary()
             self.mu = np.load('mean.npy')
             #compute features and apply similarity search
-            self.ssearch_all
+            self.ssearch_all()
                                              
         
     def load_catalog(self, data_file, label_file):
