@@ -47,5 +47,5 @@ After running, you will have some image retrieval results. Please see the images
  
 ![result_4843](https://github.com/jmsaavedrar/machine_learning/assets/8441460/7c06baa1-c1b5-422e-90f2-604b697ab9aa)
 
-This shows that we can use a pretrained model for other different but similar problem. We say similar, because images comes from the same nature. In this case, letters from emnist and digits from mnist are handwritten symbols.
+This shows that we can use a pretrained model for other different but similar problem. We say similar because images comes from the same nature. In this case, letters from emnist and digits from mnist are all handwritten symbols.
 
