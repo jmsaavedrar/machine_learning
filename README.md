@@ -1,5 +1,5 @@
 # Machine Learning
-# Exammples with CNNs
+# Examples with CNNs
 ## Dependencies 
 - Install Anaconda 
 https://docs.anaconda.com/free/anaconda/install/
@@ -8,7 +8,6 @@ https://docs.anaconda.com/free/anaconda/install/
   $ conda create -n tf python=3.9
 
   $ conda activate tf
-
 
  
 - Install Tensorflow  +  CUDA
@@ -28,7 +27,7 @@ https://docs.anaconda.com/free/anaconda/install/
   At the end, you will have the folder "mnist_model" with the model saved.
   
 ## Testing features learned by the CNN
-Now you can use the model for similarity search in other dataset like [EMNIST-LETTERS](https://www.nist.gov/itl/products-and-services/emnist-dataset).
+Now, you can use the model for similarity search in other dataset like [EMNIST-LETTERS](https://www.nist.gov/itl/products-and-services/emnist-dataset).
 To test this example, please, download the emnist dataset in npy format from [here](https://www.dropbox.com/scl/fi/kyecjtg2y8w1gmpu1fuai/emnist_data.zip?rlkey=cmhqmp74mz4kmkxupehzz0hw4&dl=0).
 
 After downloading you will have two files:
@@ -48,5 +47,5 @@ After running, you will have some image retrieval results. Please see the images
  
 ![result_4843](https://github.com/jmsaavedrar/machine_learning/assets/8441460/7c06baa1-c1b5-422e-90f2-604b697ab9aa)
 
-This shows that we can use a pretrained model for other different problem, where images share some features.
+This shows that we can use a pretrained model for other different but similar problem. We say similar, because images comes from the same nature. In this case, letters from emnist and digits from mnist are handwritten symbols.
 
