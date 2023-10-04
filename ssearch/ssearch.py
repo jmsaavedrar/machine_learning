@@ -19,9 +19,7 @@ class SSearch :
             self.sim_model = tf.keras.Model(model.input, output)        
             self.sim_model.summary()
             self.mu = np.load('mean.npy')
-            #compute features and apply similarity search
-            self.ssearch_all()
-                                             
+                                                                
         
     def load_catalog(self, data_file, label_file):
         self.data_catalog = np.load(data_file)
@@ -42,13 +40,14 @@ class SSearch :
         self.compute_features(self.data_catalog)
     
     def ssearch_all(self):
-        self.compute_features_on_catalog()
-        fv = self.fv
-        normfv = np.linalg.norm(fv, ord = 2, axis = 1, keepdims = True)        
-        fv = fv / normfv
-        self.sim = np.matmul(fv, np.transpose(fv))
-        np.save(self.sim_file, self.sim)
-        print('{} saved'.format(self.sim_file))
+        if self.sim == None :
+            self.compute_features_on_catalog()
+            fv = self.fv
+            normfv = np.linalg.norm(fv, ord = 2, axis = 1, keepdims = True)        
+            fv = fv / normfv
+            self.sim = np.matmul(fv, np.transpose(fv))
+            np.save(self.sim_file, self.sim)
+            print('{} saved'.format(self.sim_file))
     
     def random_save_example(self, n):                                        
         ids = np.random.permutation(self.sim.shape[0])[:n];
