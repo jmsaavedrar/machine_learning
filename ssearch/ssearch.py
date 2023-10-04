@@ -40,7 +40,7 @@ class SSearch :
         self.compute_features(self.data_catalog)
     
     def ssearch_all(self):
-        if self.sim == None :
+        if not isinstance(self.sim, np.ndarray): 
             self.compute_features_on_catalog()
             fv = self.fv
             normfv = np.linalg.norm(fv, ord = 2, axis = 1, keepdims = True)        
