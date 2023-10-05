@@ -1,0 +1,26 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import umap
+
+if __name__ == '__main__' :
+    fv_file = 'fv_emnist.npy'
+    lbl_file = 'lbl_emnist.npy'
+    reducer = umap.UMAP()
+    fv_data = np.load(fv_file)
+    lbl_data = np.load(lbl_file)
+    n_classes = 10
+    n_points_per_class = 100
+    
+    lbl_sample = np.random.permutation(len(lbl_data))[:n_classes]    
+        
+    embeddings = reducer.fit_transform(fv_data)
+    embedding_sample = np.empyt(0)
+    for lbl in lbl_sample :
+        idx = np.where(lbl_data == lbl)[0]
+        fv = embeddings[idx,:]
+        embedding_sample = np.vstack((embedding_sample,fv)) if len(embedding_sample)>1 else fv
+                
+    plt.scatter(embeddings[:, 0], embeddings[:, 1], c = lbl_sample)    
+    plt.title('UMAP projection of EMNIST', fontsize=24);
+    plt.show()
+    

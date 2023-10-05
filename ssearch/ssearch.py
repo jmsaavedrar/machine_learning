@@ -9,6 +9,8 @@ class SSearch :
         #loading the model
         self.sim = None
         self.sim_file = 'sim_emnist.npy'
+        self.fv_file = 'fv_emnist.npy'
+        self.lbl_file = 'lbl_emnist.npy'
         if os.path.exists(self.sim_file) :
             self.sim = np.load(self.sim_file)
         else :
@@ -33,8 +35,12 @@ class SSearch :
         
     def compute_features(self, data):
         data = self.prepare_data(data)                        
-        self.fv = self.sim_model.predict(data)         
-        print('FV-shape {}'.format(self.fv.shape))           
+        self.fv = self.sim_model.predict(data)                
+        print('FV-shape {}'.format(self.fv.shape))        
+        np.save(self.fv_file, self.fv)
+        np.save(self.lbl_file, self.data_labels)
+        print('FV saved at {}'.format(self.fv_file))           
+        print('Labels saved at {}'.format(self.lbl_file))
 #
     def compute_features_on_catalog(self):
         self.compute_features(self.data_catalog)
