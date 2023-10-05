@@ -49,3 +49,7 @@ After running, you will have some image retrieval results. Please see the images
 
 This shows that we can use a pretrained model for other different but similar problem. We say similar because images comes from the same nature. In this case, letters from emnist and digits from mnist are all handwritten symbols.
 
+In addition, you can visualize the feature space projecting the original features to 2D points using UMAP (see umap_view.py). Below is an example of the space representation on emnist dataset.
+
+![emnist_plot](https://github.com/jmsaavedrar/machine_learning/assets/8441460/121531bc-8b65-4e46-aeef-f55b60bde823)
+
