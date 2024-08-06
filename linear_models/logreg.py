@@ -24,7 +24,7 @@ class LogRegression :
             y_pred = self.predict(X, add_ones = False)
             if i % self.print_step  == 0 :                
                 acc = metrics.accuracy(y_train, y_pred)
-                print('it {} acc {}'.format(i,acc), flush = True)
+                print('it {} acc_train {}'.format(i,acc), flush = True)
                                                 
             diff = (y_train - y_pred)    
             adjust = diff * X    

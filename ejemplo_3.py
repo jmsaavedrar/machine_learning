@@ -4,15 +4,23 @@ import sklearn.datasets as datasets
 import metrics.metrics as metrics
 #dataset
 iris = datasets.load_iris()
-X = iris.data[:100,:]
-y = iris.target[:100]
 
-n = X.shape[0]
+x = np.array(iris.data)
+y = np.array(iris.target)
+c1 = 1
+c2 = 2
+
+idxs = np.where( (y == c1) | (y == c2) )[0]
+x = x[idxs,:]
+y = y[idxs]
+y[y==c1] = 0
+y[y==c2] = 1
+n = x.shape[0]
 n_test = int(np.rint(0.2 * n)) 
 
 # random sort
 idx = np.random.permutation(n)
-X = X[idx] 
+X = x[idx] 
 y = y[idx]
 
 X_train = X[:-n_test]
