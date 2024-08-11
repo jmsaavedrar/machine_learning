@@ -53,3 +53,8 @@ In addition, you can visualize the feature space projecting the original feature
 
 ![emnist_plot](https://github.com/jmsaavedrar/machine_learning/assets/8441460/121531bc-8b65-4e46-aeef-f55b60bde823)
 
+
+
+## Required Data
+-[mnist_model](https://www.dropbox.com/scl/fi/ovucxclytv4m72xnvgsb0/mnist_model.zip?rlkey=jzzaw6azetqmt2xrh0qigvxtu&st=hleis61y&dl=0)
+-[emnist_data](https://www.dropbox.com/scl/fo/y4jw1onrveqvamunqz7ev/AP3rDCddbreej7g_6hXNG-8?rlkey=r0qal2pt9qowai2j2lad2bvdu&st=xjzt26wk&dl=0)
