@@ -2,9 +2,10 @@ import numpy as np
 import nn.perceptron as perceptron
 import sklearn.datasets as datasets
 import metrics.metrics as metrics
+import matplotlib.pyplot as plt
 #dataset
 iris = datasets.load_iris()
-X = iris.data[:100,:]
+X = iris.data[:100,1:3]
 y = iris.target[:100:]
 
 n = X.shape[0]
@@ -34,9 +35,18 @@ model.setPrintSteps(1)
 
 
 coeff = model.fit(X_train, y_train)
-
 #Evaluation (accuracy x clase)
 y_pred =model.predict(X_test)
+
+
 acc= metrics.accuracy(np.expand_dims(y_test, axis = 1) , y_pred)
 print('Acc Test {}'.format(acc))
-#
+#--- view
+plt.scatter(X_test[y_test==0][:,0], X_test[y_test==0][:,1], color = 'red')
+plt.scatter(X_test[y_test==1][:,0], X_test[y_test==1][:,1], color = 'blue')
+x = np.linspace(-2, 2, 400)
+y = coeff[0] + coeff[1]*x
+plt.plot(x, y, label = f'y = {coeff[0]} + {coeff[1]}x')
+plt.grid(True)
+plt.legend()
+plt.show()
