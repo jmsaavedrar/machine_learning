@@ -39,7 +39,7 @@ model = skmodel.skMLP()
 model_path = 'modelsk'
 model.load_state_dict(torch.load(model_path, weights_only=True))
 
-testfile_name = '5527'
+testfile_name = '10'
 testfile_path = os.path.join(valdir, testfile_name + '.png')
 image = PIL.Image.open(testfile_path)
 
@@ -48,12 +48,13 @@ with torch.no_grad():
     feat = embs[file2embs[testfile_name], :]
     print(feat.shape)
     logits = model(torch.unsqueeze(torch.tensor(feat), 0))
-    cl = np.argmax(logits.numpy()[0])
+    probs = torch.nn.Softmax()(logits[0])
+    cl = np.argmax(probs.numpy())
     print(cl)
     print(cl_name[cl])
 
 ##
 plt.imshow(image, cmap = 'gray')
-plt.text(int(image.size[1]*0.5),1, cl_name[cl] + ' -- {}'.format(0.5),  ha='center', va='bottom', fontsize = 22)
+plt.text(int(image.size[1]*0.5),1, cl_name[cl] + ' -- {:.4f}'.format(probs[cl]),  ha='center', va='bottom', fontsize = 22)
 plt.axis(False)
 plt.show()
