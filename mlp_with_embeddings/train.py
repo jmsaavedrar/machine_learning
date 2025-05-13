@@ -7,10 +7,11 @@ from torch.utils.tensorboard import SummaryWriter
 
 #1: dataset loader (defining dataset)
 
-tr_dataset = dataloader.SKDataloader('/hd_data/sketch_eitz', datatype = 'train')
+datapath = '/hd_data/sketch_eitz'
+tr_dataset = dataloader.SKDataloader(datapath, datatype = 'train')
 tr_dataset = data.DataLoader(tr_dataset, batch_size = 64, shuffle = True)
 
-val_dataset = dataloader.SKDataloader('/hd_data/sketch_eitz', datatype = 'val')
+val_dataset = dataloader.SKDataloader(datapath, datatype = 'val')
 val_dataset = data.DataLoader(val_dataset, batch_size = 64, shuffle = False)
 
 #2: defining the model
