@@ -48,8 +48,9 @@ class mnist_conv(nn.Module):
             for i, data in enumerate(tr_dataset):
                 # every data instance is an input + label pair
                 inputs, tr_labels = data                                
-                #inputs  = inputs.to(device)
-                #tr_labels  = tr_labels.to(device)
+                if next(self.parameters()).is_cuda :
+                    inputs  = inputs.to(device)
+                    tr_labels  = tr_labels.to(device)
                 # set your gradients to zero for every batch
                 optimizer.zero_grad()
                 # forward phase -> making predictions for this batch 
@@ -88,8 +89,9 @@ class mnist_conv(nn.Module):
             with torch.no_grad():
                 for i, vdata in enumerate(val_dataset):
                     vinputs, vlabels = vdata                    
-                    # vinputs  = vinputs.to(device)
-                    # vlabels  = vlabels.to(device)
+                    if next(self.parameters()).is_cuda :
+                        vinputs  = vinputs.to(device)
+                        vlabels  = vlabels.to(device)
                     voutputs = self.predict(vinputs)
                     vloss = loss_fn(voutputs, vlabels)
                     vacc = torch.mean(torch.eq(torch.argmax(voutputs, dim = 1), vlabels).float())
