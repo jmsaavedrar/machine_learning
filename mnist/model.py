@@ -7,32 +7,36 @@ class mnist_conv(nn.Module):
 
         self.conv1 = nn.Conv2d(in_channels = 1, out_channels = 32, kernel_size = 3, padding = 'same')
         self.bn1 = nn.BatchNorm2d(num_features = 32)
-
+        self.mp = nn.MaxPool2d(kernel_size = 3, stride = 2)
         self.conv2 = nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = 3, padding = 'same')
         self.bn2 = nn.BatchNorm2d(num_features = 64)
 
         self.conv3 = nn.Conv2d(in_channels = 64, out_channels = 128, kernel_size = 3, padding = 'same')
         self.bn3 = nn.BatchNorm2d(num_features = 128)
-
         self.cl = nn.Linear(in_features = 128, out_features = 10)
 
         
     def forward(self, x):
         #remember x = [B, C, H, W] = transpose ([B H W C] [0,3,1,2] )
+        #--- convolution 1 ---#
         x = self.conv1(x)
         x = self.bn1(x)
-        x = nn.GELU()(x)
-
+        x = nn.GELU()(x) 
+        x = self.mp(x)
+        #--- convolution 2 ---#
         x = self.conv2(x)
         x = self.bn2(x)
-        x = nn.GELU()(x)
-
+        x = nn.GELU()(x) 
+        x = self.mp(x)
+        #--- convolution 3 ---#
         x = self.conv3(x)
         x = self.bn3(x)
         x = nn.GELU()(x)
-
-        x = x.mean(dim = (2,3)) # GAP
-        logits = self.cl(x)
+        x = self.mp(x)
+        #--- GAP ---#
+        feats = x.mean(dim = (2,3)) # GAP
+        #--- classifier ---#
+        logits = self.cl(feats)
 
         return logits
     

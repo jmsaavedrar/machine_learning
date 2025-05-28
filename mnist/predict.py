@@ -12,6 +12,7 @@ mnist_model = model.mnist_conv()
 model_path = 'model_mnist'
 mnist_model.load_state_dict(torch.load(model_path, weights_only=True))
 mnist_model.eval()
+print(mnist_model)
 datapath = '/hd_data/MNIST-5000'
 fimage = os.path.join(datapath, 'valid_images/digit_mnist_00001_7.png')
 #fimage = os.path.join(datapath, 'valid_images/digit_mnist_00002_2.png')
